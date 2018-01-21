@@ -1,5 +1,7 @@
-package com.example.lakshya.worklink;
+package com.example.lakshya.worklink.Activities;
 
+import android.app.FragmentManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,8 +15,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.lakshya.worklink.Fragments.MessageFragment;
+import com.example.lakshya.worklink.R;
+
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,MessageFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,14 +84,16 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
+        android.support.v4.app.FragmentManager fragmentManager  = getSupportFragmentManager();
+        if (id == R.id.nav_messages) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+            fragmentManager.beginTransaction().replace(R.id.content_main,new MessageFragment()).commit();
+        } else if (id == R.id.nav_calls) {
 
-        } else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_face_time) {
+
+        } else if (id == R.id.nav_settings) {
 
         } else if (id == R.id.nav_share) {
 
@@ -97,5 +104,10 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }
